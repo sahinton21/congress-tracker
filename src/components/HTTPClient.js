@@ -1,11 +1,12 @@
 const API_BASE_PATH = "https://api.congress.gov/v3";
 
-const CONGRESS_API_TOKEN = process.env.CONGRESS_API_TOKEN
+const CONGRESS_API_TOKEN = process.env.VUE_APP_CONGRESS_API_KEY
 
 export default {
   get: (url, queryParams) => {
     queryParams["format"] = "json";
-    fullUrl = `${API_BASE_PATH}${url}` + new URLSearchParams(queryParams).toString();
+    queryParams["api_key"] = CONGRESS_API_TOKEN;
+    const fullUrl = `${API_BASE_PATH}${url}?` + new URLSearchParams(queryParams).toString();
     // if (queryParams) {
     //   return fetch(`${API_BASE_PATH}${url}`, {
     //     method: 'GET',
