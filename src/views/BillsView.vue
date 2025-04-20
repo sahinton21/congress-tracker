@@ -1,4 +1,4 @@
-<template>
+<template id="outermost-container">
   <header>
     <div>
       <h1>Bills Page</h1>
@@ -18,7 +18,7 @@
 
   
 
-  <div v-if="bills">
+  <div v-if="bills" id="bills-page">
     <table>
       <thead>
         <tr>

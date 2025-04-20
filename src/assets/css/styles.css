@@ -2,14 +2,60 @@
   font-family: Arial, Helvetica, sans-serif;
 }
 
+#bills-page {
+  width:fit-content;
+  max-width: fit-content;
+  margin: 0 auto;
+}
+
+#outermost-container {
+  width: fit-content;
+  max-width: fit-content;
+  margin: 0 auto;
+}
+
 a {
   text-decoration: none;
   color: black;
 }
 
-table, th, td{
-  border: solid black 2px;
+table, td, th{
+  border-bottom: 2px solid #DDD;
   border-collapse: collapse;
+  
+}
+
+td {
+  text-align: left;
+}
+
+th {
+  text-align: center;
+}
+
+
+
+td, th {
+  padding-left: 1em;
+  padding-right: 1em;
+  font-size: 1em;
+}
+
+/*On phone screens we need to alter the padding */
+@media screen and (max-width: 450px) {
+  td, th {
+    padding-left: 2%;
+    font-size: 1em;
+  }
+}
+
+
+tr:nth-child(even) {
+  background-color: #D6EEEE;
+}
+
+.clickable-row:hover{
+  background-color: rgb(184, 181, 181);
 }
 
 nav{
