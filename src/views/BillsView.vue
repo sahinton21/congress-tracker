@@ -9,10 +9,10 @@
 
   <nav>
     <div v-if="prevLink" class="page-button">
-      <a href="" class="page-link">Prev</a>
+      <button class="next-prev-button" @click="changePage(false)">Prev</button>
     </div>
     <div v-if="nextLink" class="page-button">
-      <a href="" class="page-link">Next</a>
+      <button class="next-prev-button" @click="changePage(true)">Next</button>
     </div>
   </nav>
 
@@ -39,8 +39,11 @@
       </tbody>
     </table>
   </div>
+  <div v-else-if="bills===false">
+    <h2>Error Loading Items</h2>
+  </div>
   <div v-else>
-    <h2 >Loading</h2>
+    <h2>Loading</h2>
   </div>
 
   
@@ -57,7 +60,9 @@ export default {
       waiting: true,
       bills: null,
       nextLink:null,
-      prevLink:null
+      prevLink:null,
+      pageSize:20,
+      offset:0
     }
   },
   // setup() {
@@ -87,10 +92,11 @@ export default {
   //   };
   // },
   methods: {
-    fetchBills() {
-      APIClient.getBills()
+    fetchBills(offset, pageSize) {
+      APIClient.getBills(offset, pageSize)
       .then(response=> {
         if(!response.ok){
+          this.bills=false;
           throw new Error("Could Not Fetch Bills");
         }
         else {
@@ -121,10 +127,27 @@ export default {
     goToBill(type, number,congress){
       console.log(`${type} ${number} ${congress}`)
       console.log("WIP");
+    },
+    nextPage(){
+      this.changePage(true);
+    },
+    prevPage(){
+      this.changePage(false);
+    },
+    changePage(nextPageBool){
+      //Fetch the bills again
+      this.bills = null;
+      if(nextPageBool){
+        this.offset++;
+      }
+      else{
+        this.offset--;
+      }
+      this.fetchBills(this.offset * this.pageSize, this.pageSize);
     }
   },
   mounted() {
-    this.fetchBills();
+    this.fetchBills(this.offset * this.pageSize, this.pageSize);
   }
 };
 

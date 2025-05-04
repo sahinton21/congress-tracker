@@ -3,7 +3,7 @@ import HTTPClient from "./HTTPClient.js";
 
 
 export default {
-  getBills: () => {
-    return HTTPClient.get("/bill", {})
+  getBills: (offset, pageSize) => {
+    return HTTPClient.get("/bill", {offset:offset, limit:pageSize})
   }
 }
