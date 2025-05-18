@@ -52,6 +52,7 @@
 
 <script>
 import APIClient from '@/components/APIClient.js';
+import router from '@/router';
 //import { ref, onMounted } from 'vue';
 
 export default {
@@ -124,9 +125,13 @@ export default {
         console.error(error);
       });
     },
-    goToBill(type, number,congress){
-      console.log(`${type} ${number} ${congress}`)
-      console.log("WIP");
+    goToBill(billType, billNumber,congressNumber){
+      // We have a page for individual bills. Redirect there and use these items as query parameters so we can pull needed info
+     
+      router.push({
+        path: `/bills/${congressNumber}/${billType}/${billNumber}`,
+         
+      });
     },
     nextPage(){
       this.changePage(true);
